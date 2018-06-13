@@ -6,7 +6,7 @@ categories: random
 ---
 In accordance with the tradition of our people, I find it fitting to name the first blog post "Hello World".
 
-```
+```swift
 func createNewBlog() {
 	print("Hello World")
 }

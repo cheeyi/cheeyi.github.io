@@ -27,6 +27,7 @@ social_username: cheeyi
 
 # Build settings
 markdown: kramdown
+highlighter: rouge
 theme: jekyll-swiss
 plugins:
   - jekyll-feed
