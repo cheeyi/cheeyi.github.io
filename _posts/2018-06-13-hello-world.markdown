@@ -12,7 +12,6 @@ func createNewBlog() {
 }
 ```
 
-You can also find me on [GitHub][cheeyi-github] and [Twitter][cheeyi-twitter]!
+This blog is **[open source][blog-repo]**!
 
-[cheeyi-github]: https://github.com/cheeyi
-[cheeyi-twitter]: https://twitter.com/cheeyi
+[blog-repo]: https://github.com/cheeyi/cheeyi.github.io
