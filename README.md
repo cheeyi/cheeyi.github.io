@@ -1,4 +1,4 @@
-# cheeyi.github.io
+# [cheeyi.github.io](https://cheeyi.github.io)
 
 This is my humble attempt at a personal website that acts both as a rarely-updated blog and a résumé.
 
