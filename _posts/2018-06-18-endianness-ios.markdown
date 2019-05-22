@@ -5,6 +5,8 @@ date:   2018-06-18 20:33:00 +0800
 categories: notes
 ---
 
+<link href="/assets/css/github.css" rel="stylesheet" >
+
 Seeing as my work often involves writing/parsing raw outgoing/incoming bytes between mobile apps and Bluetooth firmware, one would think I'd be well-versed in data endianness by now. Well, today I got bitten in the butt by using the wrong endianness when parsing incoming data from a BLE firmware, and since this isn't the first time (nor will it likely be the last), I figured I should write this down just so I'd remember it in the future. Of course, my understanding can be very much flawed, please feel free to hit me up on **[Twitter][cheeyi-twitter]** and correct me!
 
 ## Big vs. Little Endian
