@@ -7,10 +7,10 @@ This is my humble attempt at a personal website that acts both as a rarely-updat
 1. Clone (or fork, if you wish) this repo:
 
 ```shell
-git clone https://github.com/cheeyi/cheeyi.github.io.git
+git clone https://github.com/cheeyi/cheeyi.github.io.git blog
 ```
 
-2. Run `bundle install` from command line to set up dependencies
+2. `cd` into the directory you cloned the repo into (`blog` in the example from the previous step), and run `bundle install` from the command line to set up dependencies.
 3. Posts are located in the `_posts` directory, so feel free to modify them or add new posts.
 4. Once you're satisfied, you'll need to build the site. From the [Jekyll docs](https://jekyllrb.com/docs/step-by-step/01-setup/):
 
@@ -22,7 +22,7 @@ git clone https://github.com/cheeyi/cheeyi.github.io.git
 ## Updating dependencies
 
 1. Update `Gemfile` as you see fit.
-2. Run `bundle update`.
+2. Run `bundle install` to add new gems, or if you're prepared for updates that may potentially break some gems' compatibility with one another, `bundle update`.
 
 ## License
 
