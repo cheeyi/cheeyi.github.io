@@ -25,7 +25,7 @@ This was automatically set by CocoaPods if you run `pod install` without uncomme
 
 This was an oversight on my part. During the development phase, we developers rarely build our apps in Release mode, and so things work great if you build your app on a test device or simulator that is running iOS 11, since Xcode—to save time—only builds for the architecture of the target device you're running on. This doesn't apply for Release builds, since you'd want your Release build to be runnable on all devices you claim to support.
 
-![Build Active Architectures Only]({{ "/assets/build-active-architectures-only.png" | absolute_url }})
+![Build Active Architectures Only]({{ "/assets/images/build-active-architectures-only.png" | absolute_url }})
 
 In my case, the Release build will need to support armv7 and arm64, but since the Pods project only supports arm64 this became an issue.
 

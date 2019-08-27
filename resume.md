@@ -4,7 +4,7 @@ title: Résumé
 permalink: /resume/
 ---
 
-> Note: You can download a traditional PDF of my résumé **[here]({{ "/assets/resume.pdf" | absolute_url }}){:target="_blank"}**.
+> Note: You can download a traditional PDF of my résumé **[here]({{ "/assets/docs/resume.pdf" | absolute_url }}){:target="_blank"}**.
 
 # Professional Work Experience
 
@@ -43,7 +43,7 @@ I was an intern at Pentamaster during summer 2013. Pentamaster is a Malaysian co
 
 [punchthrough]: https://punchthrough.com
 [lbx-android-announcement]: https://www.punchthrough.com/blog/posts/introducing-lightblue-explorer-for-android
-[lbx-android-mike-linkedin-post-image]: /assets/mike-linkedin-post.png
+[lbx-android-mike-linkedin-post-image]: /assets/images/mike-linkedin-post.png
 [lbx-android-mike-linkedin-post]: https://www.linkedin.com/feed/update/urn:li:activity:6303761722201251840
 [lbx-android]: https://play.google.com/store/apps/details?id=com.punchthrough.lightblueexplorer
 [lbx-ios]: https://itunes.apple.com/us/app/lightblue-explorer/id557428110?mt=8
