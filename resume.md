@@ -23,7 +23,7 @@ A lot of my work here at Punch Through are under NDA by our clients, so I can't 
 - Released **[LightBlue® Explorer for Android][lbx-android]**, our flagship Bluetooth development utility for other developers — see the announcement blog post **[here][lbx-android-announcement]{:target="_blank"}** and a LinkedIn post by Mike, Punch Through's president **[here][lbx-android-mike-linkedin-post]{:target="_blank"}/[image][lbx-android-mike-linkedin-post-image]{:target="_blank"}**.
 - Released the Cloud Connect feature for **[LightBlue® Explorer on iOS][lbx-ios]**, a feature allowing incoming Bluetooth data to be sent to cloud platforms such as AWS IoT and Adafruit IO. Announcement blog post **[here][cloud-connect-announcement]{:target="_blank"}**.
 
-After I left the U.S. in April 2018, I still maintain a great working relationship with Punch Through as a freelance worker.
+After I left the U.S. in April 2018, I still maintain a great working relationship with Punch Through as a remote team member.
 
 ## Expedia
 
