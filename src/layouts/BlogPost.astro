@@ -5,10 +5,11 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import WaveDivider from '../components/WaveDivider.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, categories } = Astro.props;
 ---
 
 <html lang="en">
@@ -27,7 +28,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				box-shadow: var(--box-shadow-colored);
 			}
 			.prose {
 				width: 720px;
@@ -52,6 +53,21 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			.category-badge {
+				display: inline-block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				padding: 0.25rem 0.75rem;
+				border-radius: 20px;
+				margin-bottom: 1rem;
+				background: var(--gradient-primary);
+				color: white;
+			}
+			.category-badge.random {
+				background: var(--accent-secondary);
+			}
 		</style>
 	</head>
 
@@ -64,6 +80,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</div>
 				<div class="prose">
 					<div class="title">
+						<span class={`category-badge ${categories}`}>
+							{categories}
+						</span>
 						<div class="date">
 							<FormattedDate date={pubDate} />
 							{
@@ -81,6 +100,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</div>
 			</article>
 		</main>
+		<WaveDivider />
 		<Footer />
 	</body>
 </html>

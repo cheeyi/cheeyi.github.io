@@ -1,0 +1,59 @@
+---
+// Decorative SVG wave divider
+interface Props {
+	position?: 'top' | 'bottom';
+	flip?: boolean;
+}
+
+const { position = 'bottom', flip = false } = Astro.props;
+---
+
+<div class={`wave-divider ${position} ${flip ? 'flip' : ''}`}>
+	<svg
+		viewBox="0 0 1200 120"
+		preserveAspectRatio="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<defs>
+			<linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+				<stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.3" />
+				<stop offset="50%" style="stop-color:#ec4899;stop-opacity:0.3" />
+				<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.3" />
+			</linearGradient>
+		</defs>
+		<path
+			d="M0,0 C300,100 900,0 1200,50 L1200,120 L0,120 Z"
+			fill="url(#waveGradient)"
+		></path>
+	</svg>
+</div>
+
+<style>
+	.wave-divider {
+		width: 100%;
+		overflow: hidden;
+		line-height: 0;
+		position: relative;
+	}
+
+	.wave-divider.top {
+		transform: rotate(180deg);
+	}
+
+	.wave-divider.flip svg {
+		transform: scaleX(-1);
+	}
+
+	.wave-divider svg {
+		position: relative;
+		display: block;
+		width: calc(100% + 1.3px);
+		height: 60px;
+	}
+
+	@media (max-width: 720px) {
+		.wave-divider svg {
+			height: 40px;
+		}
+	}
+</style>

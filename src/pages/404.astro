@@ -1,0 +1,180 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="404 - Page Not Found" description="The page you're looking for doesn't exist." />
+		<style>
+			.error-container {
+				min-height: 60vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				padding: 2rem;
+			}
+
+			.error-code {
+				font-size: 8rem;
+				font-weight: 700;
+				background: var(--gradient-accent);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				background-size: 200% auto;
+				animation: gradient-shift 3s ease infinite, float 3s ease-in-out infinite;
+				margin: 0;
+				line-height: 1;
+			}
+
+			@keyframes gradient-shift {
+				0%, 100% { background-position: 0% center; }
+				50% { background-position: 100% center; }
+			}
+
+			@keyframes float {
+				0%, 100% { transform: translateY(0); }
+				50% { transform: translateY(-20px); }
+			}
+
+			.error-message {
+				font-size: 1.5rem;
+				color: rgb(var(--gray-dark));
+				margin: 1rem 0 2rem;
+			}
+
+			.error-description {
+				font-size: 1rem;
+				color: rgb(var(--gray));
+				max-width: 500px;
+				margin-bottom: 2rem;
+			}
+
+			.home-link {
+				display: inline-block;
+				padding: 1rem 2rem;
+				background: var(--gradient-primary);
+				color: white;
+				text-decoration: none;
+				border-radius: 30px;
+				font-weight: 700;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+			}
+
+			.home-link:hover {
+				transform: translateY(-3px) scale(1.05);
+				box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+			}
+
+			.home-link::after {
+				display: none;
+			}
+
+			.particles {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				pointer-events: none;
+				z-index: -1;
+			}
+
+			.particle {
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				background: var(--accent);
+				border-radius: 50%;
+				opacity: 0.3;
+				animation: particle-float 6s ease-in-out infinite;
+			}
+
+			.particle:nth-child(1) {
+				left: 10%;
+				animation-delay: 0s;
+				animation-duration: 5s;
+			}
+
+			.particle:nth-child(2) {
+				left: 30%;
+				animation-delay: 1s;
+				animation-duration: 7s;
+				background: var(--accent-secondary);
+			}
+
+			.particle:nth-child(3) {
+				left: 50%;
+				animation-delay: 2s;
+				animation-duration: 6s;
+			}
+
+			.particle:nth-child(4) {
+				left: 70%;
+				animation-delay: 1.5s;
+				animation-duration: 8s;
+				background: var(--accent-secondary);
+			}
+
+			.particle:nth-child(5) {
+				left: 90%;
+				animation-delay: 0.5s;
+				animation-duration: 5.5s;
+			}
+
+			@keyframes particle-float {
+				0% {
+					transform: translateY(100vh) scale(0);
+					opacity: 0;
+				}
+				10% {
+					opacity: 0.3;
+				}
+				90% {
+					opacity: 0.3;
+				}
+				100% {
+					transform: translateY(-100px) scale(1);
+					opacity: 0;
+				}
+			}
+
+			@media (max-width: 720px) {
+				.error-code {
+					font-size: 5rem;
+				}
+
+				.error-message {
+					font-size: 1.2rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="error-container">
+				<div class="particles">
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+				</div>
+				<h1 class="error-code">404</h1>
+				<p class="error-message">Oops! Page not found.</p>
+				<p class="error-description">
+					The page you're looking for seems to have wandered off into the digital void.
+					Let's get you back on track!
+				</p>
+				<a href="/" class="home-link">Take me home</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
