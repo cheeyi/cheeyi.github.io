@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  "CocoaPods Deployment Target Mismatch"
-date:   2018-06-22 17:16:00 +0800
+title: "CocoaPods Deployment Target Mismatch"
+pubDate: 2018-06-22T17:16:00+08:00
 categories: notes
+description: "How to fix the 'Target was rejected as an implicit dependency' error when using CocoaPods with mismatched deployment targets."
 ---
 
 As an iOS developer, it's inevitable that we'll come across a situation where we're forced to use CocoaPods—be it trying to integrate the Google Maps SDK, Firebase and the like.
@@ -25,7 +25,7 @@ This was automatically set by CocoaPods if you run `pod install` without uncomme
 
 This was an oversight on my part. During the development phase, we developers rarely build our apps in Release mode, and so things work great if you build your app on a test device or simulator that is running iOS 11, since Xcode—to save time—only builds for the architecture of the target device you're running on. This doesn't apply for Release builds, since you'd want your Release build to be runnable on all devices you claim to support.
 
-![Build Active Architectures Only]({{ "/assets/images/build-active-architectures-only.png" | absolute_url }})
+![Build Active Architectures Only](/assets/images/build-active-architectures-only.png)
 
 In my case, the Release build will need to support armv7 and arm64, but since the Pods project only supports arm64 this became an issue.
 
