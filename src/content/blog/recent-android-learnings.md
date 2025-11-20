@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  "Recent Android Dev Learnings"
-date:   2019-05-18 19:21:00 +0800
+title: "Recent Android Dev Learnings"
+pubDate: 2019-05-18T19:21:00+08:00
 categories: notes
+description: "Key learnings from working on a large-scale Android project: Kotlin coroutines, sealed classes, MVVM architecture, Dagger 2, and Retrofit."
 ---
 
 I've had the privilege recently to work on a client project that was very much like my past experience of working at Expedia—tons of engineers, an actual QA process, sprint-based development schedules and the works. I'm a self-learned Android developer early 2017 who came from the iOS development world, so this is my first experience working on such a big and established production codebase. Here are some of the key learnings I got out of this project.
@@ -17,7 +17,7 @@ I think of sealed classes as enum classes on steroids. You can have a few differ
 
 ### Coroutines
 
-Kotlin coroutines went stable not very long ago, and is something I've always wanted to try and learn. My initial attempt at learning coroutines before this project kicked off didn't go so well, I was quickly overwhelmed by the official Kotlin documentation that already assumes some understanding of what coroutines fundamentally are, because well I had no idea of the problem coroutines are trying to solve. 
+Kotlin coroutines went stable not very long ago, and is something I've always wanted to try and learn. My initial attempt at learning coroutines before this project kicked off didn't go so well, I was quickly overwhelmed by the official Kotlin documentation that already assumes some understanding of what coroutines fundamentally are, because well I had no idea of the problem coroutines are trying to solve.
 
 The second time around I was more prepared, also because I've looked at a few usages in the client's codebase to give me a vague understanding that coroutines are basically like writing callback-based code but without having to implement callbacks. It allows us to reason with code in a slightly more sane manner, because you aren't always trying to follow callbacks around the source file, and it opened up a world of possibility for me that I would've thought possible. It did require a different perspective of looking at things, especially how one understands and reasons with concurrency and asynchronicity. Once I did that, everything started to click from there on and I went on to learn more advanced concepts like `Channel` and `Flow`.
 

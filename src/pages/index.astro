@@ -1,0 +1,44 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Hi, I'm Chee Yi 👋</h1>
+			<p>
+				My first name is <em>Chee Yi</em> (that's two words), and my last name is <em>Ong</em>.
+			</p>
+
+			<p>
+				I'm a software engineer at <a href="https://punchthrough.com">Punch Through</a> working on projects with a focus on Bluetooth Low Energy connected devices. I love gaming, photography, food and travel. My hometown is a beautiful island in Malaysia called Penang.
+			</p>
+
+			<p>
+				<img src="/assets/images/profile.jpg" alt="Me" />
+			</p>
+
+			<p>
+				I graduated from the University of Minnesota Twin Cities with a B.S. in Computer Engineering, after which I spent about 2.5 years in the United States working for tech companies and getting valuable experience before returning home to Penang, where I currently reside.
+			</p>
+
+			<p>
+				If you're interested in finding out more about my professional work experience, head this way to my <strong><a href="/resume">résumé</a></strong>.
+			</p>
+
+			<h2>Recent Posts</h2>
+			<p>
+				I occasionally write about software engineering, mobile development, and tech. Check out my <a href="/blog">blog</a> for the latest posts.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
