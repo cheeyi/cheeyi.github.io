@@ -1,0 +1,249 @@
+---
+export interface TimelineItem {
+	title: string;
+	period: string;
+	location: string;
+	isCurrent: boolean;
+	responsibilities: string[];
+}
+
+interface Props {
+	items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="timeline">
+	{items.map((item, index) => (
+		<div class="timeline-item" data-index={index}>
+			<div class="timeline-marker">
+				<div class={`timeline-node ${item.isCurrent ? 'current' : ''}`}></div>
+				{index < items.length - 1 && <div class="timeline-line"></div>}
+			</div>
+			<div class="timeline-content">
+				<button class="timeline-header" aria-expanded={item.isCurrent ? 'true' : 'false'}>
+					<div class="timeline-title-group">
+						<h3 class="timeline-title">{item.title}</h3>
+						<span class="timeline-period">{item.period}</span>
+						<span class="timeline-location">{item.location}</span>
+					</div>
+					<svg class="timeline-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+				<div class="timeline-details" style={item.isCurrent ? '' : 'display: none;'}>
+					<ul>
+						{item.responsibilities.map((resp) => (
+							<li>{resp}</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</div>
+	))}
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const headers = document.querySelectorAll('.timeline-header');
+
+		headers.forEach((header) => {
+			header.addEventListener('click', () => {
+				const details = header.nextElementSibling as HTMLElement;
+				const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+				// Toggle current item
+				header.setAttribute('aria-expanded', (!isExpanded).toString());
+
+				if (details) {
+					if (isExpanded) {
+						details.style.display = 'none';
+					} else {
+						details.style.display = 'block';
+					}
+				}
+
+				// Toggle chevron rotation
+				header.classList.toggle('expanded');
+			});
+		});
+	});
+</script>
+
+<style>
+	.timeline {
+		position: relative;
+		padding: 2rem 0;
+		margin: 2rem 0;
+	}
+
+	.timeline-item {
+		display: flex;
+		gap: 2rem;
+		margin-bottom: 0;
+		position: relative;
+		animation: fadeIn 0.6s ease-out backwards;
+	}
+
+	.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+	.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+	.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+
+	.timeline-marker {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+		flex-shrink: 0;
+	}
+
+	.timeline-node {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: var(--gradient-primary);
+		border: 4px solid var(--bg-primary);
+		box-shadow: 0 0 0 2px var(--accent);
+		z-index: 2;
+		transition: all 0.3s ease;
+	}
+
+	.timeline-node.current {
+		width: 24px;
+		height: 24px;
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% {
+			box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(168, 85, 247, 0.2);
+		}
+		50% {
+			box-shadow: 0 0 0 2px var(--accent), 0 0 0 8px rgba(168, 85, 247, 0.4);
+		}
+	}
+
+	.timeline-line {
+		width: 2px;
+		flex: 1;
+		min-height: 80px;
+		background: linear-gradient(180deg, var(--accent) 0%, var(--accent-secondary) 100%);
+		margin-top: 8px;
+	}
+
+	.timeline-content {
+		flex: 1;
+		padding-bottom: 2rem;
+	}
+
+	.timeline-header {
+		width: 100%;
+		background: none;
+		border: none;
+		padding: 0;
+		text-align: left;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+		transition: all 0.3s ease;
+	}
+
+	.timeline-header:hover {
+		opacity: 0.8;
+	}
+
+	.timeline-header.expanded .timeline-chevron {
+		transform: rotate(180deg);
+	}
+
+	.timeline-title-group {
+		flex: 1;
+	}
+
+	.timeline-title {
+		margin: 0 0 0.25rem 0;
+		font-size: 1.5em;
+		color: rgb(var(--black));
+		background: var(--gradient-primary);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.timeline-period {
+		display: block;
+		font-size: 0.9em;
+		color: rgb(var(--gray));
+		margin-bottom: 0.25rem;
+	}
+
+	.timeline-location {
+		display: block;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+		font-style: italic;
+	}
+
+	.timeline-chevron {
+		flex-shrink: 0;
+		color: var(--accent);
+		transition: transform 0.3s ease;
+		margin-top: 0.25rem;
+	}
+
+	.timeline-details {
+		margin-top: 1rem;
+		padding-left: 0;
+		animation: slideDown 0.3s ease-out;
+	}
+
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.timeline-details ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.timeline-details li {
+		position: relative;
+		padding-left: 1.5rem;
+		margin-bottom: 0.75rem;
+		line-height: 1.6;
+		animation: none;
+	}
+
+	.timeline-details li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--accent);
+		font-weight: bold;
+	}
+
+	@media (max-width: 720px) {
+		.timeline-item {
+			gap: 1rem;
+		}
+
+		.timeline-title {
+			font-size: 1.25em;
+		}
+
+		.timeline-details li {
+			font-size: 0.9em;
+		}
+	}
+</style>

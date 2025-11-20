@@ -1,5 +1,48 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
+import Timeline from '../components/Timeline.astro';
+import type { TimelineItem } from '../components/Timeline.astro';
+
+// Punch Through career timeline
+const punchThroughTimeline: TimelineItem[] = [
+	{
+		title: 'Principal Software Engineer',
+		period: 'May 2023 - Present · 2 yrs 7 mos',
+		location: 'Remote · Remote',
+		isCurrent: true,
+		responsibilities: [
+			'My role as technical lead on mobile projects allows me to focus on system design and architecture, requirements planning, and technical leadership',
+			'Spearheading and advocating for best practices in system and technical architecture',
+			'FDA medical device software, IEC62304, and other formal documentation needs for high-stakes software projects',
+		],
+	},
+	{
+		title: 'Senior Software Engineer',
+		period: 'May 2020 - May 2023 · 3 yrs 1 mo',
+		location: 'Remote · Remote',
+		isCurrent: false,
+		responsibilities: [
+			'Technical lead and individual contributor on internal and external client projects, primary communicator to both internal and external stakeholders',
+			'Immense passion and experience in system architecture and design, and project planning/management',
+			'Huge advocate for team members\' personal growth development and served as a mentor to junior engineers',
+			'Part of the company hiring team',
+			'Share knowledge as part of a company initiative to give back to the tech community via blog posts',
+			'Published an authoritative and comprehensive guide to Android BLE development: https://punchthrough.com/android-ble-guide/',
+		],
+	},
+	{
+		title: 'Software Engineer',
+		period: 'Mar 2018 - May 2020 · 2 yrs 3 mos',
+		location: 'Remote · Remote',
+		isCurrent: false,
+		responsibilities: [
+			'Continued working on both client and internal-facing projects related to BLE and connected products',
+			'Auditing client projects with BLE issues',
+			'Experience implementing over-the-air firmware updates, BLE throughput optimizations, unit-tested mobile BLE SDKs',
+			'Contributing to company blog posts: https://punchthrough.com/author/cong/',
+		],
+	},
+];
 ---
 
 <Layout
@@ -39,6 +82,9 @@ import Layout from '../layouts/BlogPost.astro';
 		<li>Released <strong><a href="https://play.google.com/store/apps/details?id=com.punchthrough.lightblueexplorer">LightBlue® Explorer for Android</a></strong>, our flagship Bluetooth development utility for other developers — see the announcement blog post <strong><a href="https://www.punchthrough.com/blog/posts/introducing-lightblue-explorer-for-android" target="_blank">here</a></strong> and a LinkedIn post by Mike, Punch Through's president <strong><a href="https://www.linkedin.com/feed/update/urn:li:activity:6303761722201251840" target="_blank">here</a></strong>/<strong><a href="/assets/images/mike-linkedin-post.png" target="_blank">image</a></strong>.</li>
 		<li>Released the Cloud Connect feature for <strong><a href="https://itunes.apple.com/us/app/lightblue-explorer/id557428110?mt=8">LightBlue® Explorer on iOS</a></strong>, a feature allowing incoming Bluetooth data to be sent to cloud platforms such as AWS IoT and Adafruit IO. Announcement blog post <strong><a href="https://www.punchthrough.com/blog/posts/introducing-cloud-connect-for-lightblue-explorer" target="_blank">here</a></strong>.</li>
 	</ul>
+
+	<h3>My Journey at Punch Through</h3>
+	<Timeline items={punchThroughTimeline} />
 
 	<p>
 		After I left the U.S. in April 2018, I still maintain a great working relationship with Punch Through as a remote team member.

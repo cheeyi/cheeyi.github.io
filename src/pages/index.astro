@@ -3,7 +3,45 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import WaveDivider from '../components/WaveDivider.astro';
+import SkillCard from '../components/SkillCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import type { Skill } from '../components/SkillCard.astro';
+
+// Skills data organized by category
+const devSkills: Skill[] = [
+	{ name: 'Android', icon: '🤖' },
+	{ name: 'iOS', icon: '📱' },
+	{ name: 'Cross-Platform', icon: '🌐' },
+	{ name: 'macOS', icon: '💻' },
+];
+
+const languageSkills: Skill[] = [
+	{ name: 'Kotlin', icon: '🔷' },
+	{ name: 'Swift', icon: '🦅' },
+	{ name: 'Dart', icon: '🎯' },
+	{ name: 'Java', icon: '☕' },
+	{ name: 'Objective-C', icon: '🔧' },
+];
+
+const bluetoothSkills: Skill[] = [
+	{ name: 'Android BLE API', icon: '🔌' },
+	{ name: 'iOS Core Bluetooth', icon: '⚡' },
+	{ name: 'Protocol Design', icon: '🧠' },
+	{ name: 'OTA Firmware Updates', icon: '📲' },
+	{ name: 'AWS IoT', icon: '☁️' },
+];
+
+const architectureSkills: Skill[] = [
+	{ name: 'System Design', icon: '📐' },
+	{ name: 'Technical Leadership', icon: '👥' },
+	{ name: 'MVVM', icon: '🏗️' },
+	{ name: 'TDD', icon: '🧪' },
+];
+
+const medicalDeviceSkills: Skill[] = [
+	{ name: 'FDA Submissions', icon: '🏥' },
+	{ name: 'IEC 62304 Class A/B/C', icon: '📋' },
+];
 ---
 
 <!doctype html>
@@ -35,10 +73,69 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				If you're interested in finding out more about my professional work experience, head this way to my <strong><a href="/resume">résumé</a></strong>.
 			</p>
 
-			<h2>Recent Posts</h2>
 			<p>
 				I occasionally write about software engineering, mobile development, and tech. Check out my <a href="/blog">blog</a> for the latest posts.
 			</p>
+
+			<hr />
+			<br />
+
+			<h2>Skills & Technologies</h2>
+
+			<div class="skills-section">
+				<SkillCard category="Technical Development" skills={devSkills} />
+				<SkillCard category="Programming Languages" skills={languageSkills} />
+				<SkillCard category="Bluetooth & IoT" skills={bluetoothSkills} />
+				<SkillCard category="Architecture & Leadership" skills={architectureSkills} />
+				<SkillCard category="Medical Device Software" skills={medicalDeviceSkills} />
+			</div>
+
+			<hr />
+			<br />
+
+			<h2>Publications & Writing</h2>
+
+			<p>
+				External articles and posts authored by yours truly.
+			</p>
+
+			<div class="publications-section">
+				<div class="publication-card featured">
+					<div class="publication-icon">📚</div>
+					<div class="publication-content">
+						<h3 class="publication-title">
+							<a href="https://punchthrough.com/android-ble-guide/" target="_blank" rel="noopener noreferrer">
+								The Ultimate Guide to Android Bluetooth Low Energy
+							</a>
+						</h3>
+						<p class="publication-description">
+							My proudest work! An authoritative and comprehensive guide to Android BLE development, covering everything from basic concepts to advanced implementations. This resource has become a go-to reference for developers working with Bluetooth Low Energy on Android.
+						</p>
+						<div class="publication-meta">
+							<span class="publication-badge">Technical Guide</span>
+							<span class="publication-link">punchthrough.com →</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="publication-card">
+					<div class="publication-icon">✍️</div>
+					<div class="publication-content">
+						<h3 class="publication-title">
+							<a href="https://punchthrough.com/author/cong/" target="_blank" rel="noopener noreferrer">
+								Company Blog Posts
+							</a>
+						</h3>
+						<p class="publication-description">
+							Regular technical articles and insights on Bluetooth development, mobile engineering best practices, and lessons learned from client projects.
+						</p>
+						<div class="publication-meta">
+							<span class="publication-badge">Blog Series</span>
+							<span class="publication-link">View all posts →</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 		<WaveDivider />
 		<Footer />
