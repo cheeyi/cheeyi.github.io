@@ -1,11 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-
-export interface Skill {
-	name: string;
-	icon?: string;
-	proficiency?: 'expert' | 'advanced' | 'intermediate';
-}
+import type { Skill } from '../data/skills';
 
 interface Props {
 	category: string;
