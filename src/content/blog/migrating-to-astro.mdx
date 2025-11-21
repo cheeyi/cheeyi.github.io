@@ -1,0 +1,54 @@
+---
+title: "Migrating to Astro"
+pubDate: 2025-11-21T12:00:00+08:00
+categories: tech
+description: "After 7 years of running on Jekyll, I've finally migrated my personal site to Astro. Here's a look at the new tech stack."
+---
+import GithubRepoCard from '../../components/GithubRepoCard.astro';
+
+It's been a long time coming (also — HELLO! I haven't posted in _ages_). I've been running this blog on [Jekyll](https://jekyllrb.com/) since 2018. It served me well — simple, reliable, and static. But as the years went by, the Ruby environment management and the limitations of Liquid templates started to feel a bit dated compared to the modern JavaScript ecosystem I read and hear about daily.
+
+After some research, I decided to take the plunge and migrate everything to [Astro](https://astro.build/). LLM agents made this basically effortless — I was able to describe what I wanted, review the outputs, learn from them, and ship stuff very quickly.
+
+## Why Astro?
+
+I wanted something that felt modern but didn't sacrifice the performance benefits of a static site. Astro was the perfect fit for a few reasons:
+
+1.  **Zero JavaScript by Default**: Astro ships HTML. It only hydrates the interactive parts of the page if you explicitly tell it to. This keeps the site incredibly fast.
+2.  **Component-Based Architecture**: Being able to build reusable UI components (like my Header, Footer, and Skill cards) is a breath of fresh air compared to partials and includes. My mobile skillsets transfer over just fine.
+3.  **Markdown & MDX Support**: I can still write my posts in Markdown (or MDX if I need components inside my posts), which made migrating my existing content relatively painless.
+
+### The New Stack
+
+<GithubRepoCard
+    repo="cheeyi/cheeyi.github.io"
+    description="The source code for this website. Built with Astro, hosted on GitHub Pages."
+/>
+
+The new setup is pretty streamlined:
+*   **Framework**: Astro 5.0
+*   **Hosting**: GitHub Pages (still the best place for a dev portfolio, IMO)
+*   **Styling**: Custom CSS (keeping it lightweight)
+*   **Content**: MDX for blog posts
+
+### How it Works
+
+One of the coolest things about Astro is the `.astro` file format. It allows you to write the JavaScript logic that runs at build time right alongside the HTML template.
+
+```astro
+---
+// This runs at build time!
+const title = "My Awesome Blog Post";
+---
+
+<h1>{title}</h1>
+<p>This HTML is generated statically.</p>
+```
+
+It feels like a perfect blend of static site generation and modern component ergonomics.
+
+## Looking Ahead
+
+The migration set up a foundation that makes it easier (and more fun) to write and ship new posts. I'm excited to explore more of what Astro can do down the road, too!
+
+Here's to the next 7 years! 🚀 (I'm lazy!)

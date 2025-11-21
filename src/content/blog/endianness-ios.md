@@ -1,7 +1,7 @@
 ---
 title: "A Note On Data Endianness — iOS Edition"
 pubDate: 2018-06-18T20:33:00+08:00
-categories: notes
+categories: tech
 description: "Understanding Big Endian vs Little Endian and dealing with byte order in iOS development."
 ---
 

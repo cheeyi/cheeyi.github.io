@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	repo: string;
+	description?: string;
+}
+
+const { repo, description } = Astro.props;
+const url = `https://github.com/${repo}`;
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="repo-card">
+	<div class="repo-header">
+		<Icon name="simple-icons:github" class="github-icon" />
+		<span class="repo-name">{repo}</span>
+	</div>
+	{description && <p class="repo-description">{description}</p>}
+</a>
+
+<style>
+	.repo-card {
+		display: block;
+		border: 1px solid var(--gray-light);
+		border-radius: 12px;
+		padding: 1.5rem;
+		text-decoration: none;
+		color: rgb(var(--black));
+		background: var(--bg-secondary);
+		transition: all 0.3s ease;
+		margin: 2rem 0;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.repo-card:hover {
+		border-color: var(--accent);
+		transform: translateY(-2px);
+		box-shadow: var(--box-shadow-colored);
+	}
+
+	.repo-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-weight: 700;
+		font-size: 1.1rem;
+		color: var(--accent);
+	}
+
+	.github-icon {
+		width: 24px;
+		height: 24px;
+		color: rgb(var(--black));
+	}
+
+	.repo-description {
+		margin: 0.75rem 0 0 0;
+		font-size: 0.95rem;
+		color: rgb(var(--gray));
+		line-height: 1.6;
+	}
+</style>

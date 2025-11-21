@@ -1,7 +1,7 @@
 ---
 title: "I Built a PC!"
 pubDate: 2019-08-27T13:00:00+08:00
-categories: notes
+categories: personal
 description: "Building a high-performance PC for work and gaming to escape the thermal throttling of my MacBook Pro."
 ---
 

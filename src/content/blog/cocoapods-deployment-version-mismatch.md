@@ -1,7 +1,7 @@
 ---
 title: "CocoaPods Deployment Target Mismatch"
 pubDate: 2018-06-22T17:16:00+08:00
-categories: notes
+categories: tech
 description: "How to fix the 'Target was rejected as an implicit dependency' error when using CocoaPods with mismatched deployment targets."
 ---
 

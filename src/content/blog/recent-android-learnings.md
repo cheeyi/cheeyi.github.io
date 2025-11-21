@@ -1,7 +1,7 @@
 ---
 title: "Recent Android Dev Learnings"
 pubDate: 2019-05-18T19:21:00+08:00
-categories: notes
+categories: tech
 description: "Key learnings from working on a large-scale Android project: Kotlin coroutines, sealed classes, MVVM architecture, Dagger 2, and Retrofit."
 ---
 
