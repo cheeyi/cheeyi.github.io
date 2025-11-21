@@ -1,6 +1,6 @@
 # cheeyi.me
 
-My personal website and blog, built with [Astro](https://astro.build). Previously built with Jekyll, migrated to Astro in November 2025 for better performance and modern tooling.
+My personal website and blog, built with [Astro](https://astro.build). Previously built with Jekyll, [migrated to Astro in November 2025](https://cheeyi.me/blog/migrating-to-astro/) for better performance and modern tooling.
 
 ## 🚨 Prerequisites
 
@@ -37,11 +37,13 @@ The dev server runs at **http://localhost:4321/**
 
 ### Step-by-Step Guide
 
-1. **Create a new markdown file** in `src/content/blog/`:
+1. **Create a new file** in `src/content/blog/`:
+   - Use `.md` for standard posts.
+   - Use `.mdx` if you need to use components (like `<GithubRepoCard />`) inside the post.
 
 ```bash
-# Example: src/content/blog/my-new-post.md
-touch src/content/blog/my-new-post.md
+# Example
+touch src/content/blog/my-new-post.mdx
 ```
 
 2. **Add front matter** at the top:
@@ -50,28 +52,17 @@ touch src/content/blog/my-new-post.md
 ---
 title: "Your Post Title"
 pubDate: 2025-11-20T12:00:00+08:00
-categories: notes  # or "random"
+categories: tech  # or "random"
 description: "A brief description for SEO"
 ---
 
 Your post content starts here...
 ```
 
-3. **Write content** using Markdown:
+3. **Write content** using Markdown/MDX:
    - Code blocks with syntax highlighting
-   - Images: `![Alt text](/assets/images/your-image.jpg)`
+   - Images: `![Alt text](../../assets/my-image.jpg)` (Relative path to `src/assets` allows Astro to optimize images)
    - Links: `[text](url)`
-
-4. **Add images** (if needed):
-   - Place in `public/assets/images/`
-   - Or organize in subdirectories: `public/assets/images/post-name/`
-
-5. **Test locally**:
-
-```bash
-npm run dev
-# Visit http://localhost:4321/blog/my-new-post/
-```
 
 ### Example Blog Post
 
@@ -79,7 +70,7 @@ npm run dev
 ---
 title: "Building a Modern Web App"
 pubDate: 2025-11-20T14:30:00+08:00
-categories: notes
+categories: tech
 description: "My experience building a web app with Astro and TypeScript."
 ---
 
@@ -95,16 +86,14 @@ const greet = (name: string) => {
 };
 ```\`
 
-![My screenshot](/assets/images/screenshot.png)
-
-Check out [Astro](https://astro.build) for more info!
+![My screenshot](../../assets/screenshot.png)
 ```
 
 ## 🚀 Deployment
 
 ### Automatic Deployment
 
-This site **automatically deploys** to GitHub Pages when you push to `main`:
+This site **automatically deploys** to GitHub Pages when pushed to `main`:
 
 ```bash
 git add .
@@ -123,52 +112,12 @@ git push origin main
 - Source: **GitHub Actions**
 - Custom domain: **cheeyi.me** (configured via CNAME file)
 
-## 📁 Project Structure
-
-```text
-├── .github/
-│   └── workflows/
-│       └── deploy.yml       # GitHub Actions deployment
-├── public/
-│   ├── favicon.svg
-│   └── assets/              # Static files
-│       ├── images/          # Blog images
-│       ├── docs/            # PDFs (resume)
-│       └── css/             # Custom CSS
-├── src/
-│   ├── components/          # Reusable components
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   └── ...
-│   ├── content/
-│   │   └── blog/            # 📝 Blog posts go here
-│   │       ├── hello-world.md
-│   │       ├── endianness-ios.md
-│   │       └── ...
-│   ├── layouts/
-│   │   └── BlogPost.astro   # Post template
-│   ├── pages/
-│   │   ├── index.astro      # Home page
-│   │   ├── about.astro      # About page
-│   │   ├── resume.astro     # Resume
-│   │   ├── blog/            # Blog listing
-│   │   └── rss.xml.js       # RSS feed
-│   ├── styles/              # Global CSS
-│   ├── consts.ts            # Site config
-│   └── content.config.ts    # Content schema
-├── astro.config.mjs         # Astro config
-├── package.json
-├── tsconfig.json
-├── CNAME                    # Custom domain
-└── README.md                # This file
-```
-
 ## 🛠 Tech Stack
 
-- **Framework**: [Astro](https://astro.build) v5.15.9
+- **Framework**: [Astro](https://astro.build)
 - **Language**: TypeScript
 - **Styling**: CSS with custom properties
-- **Syntax Highlighting**: [Shiki](https://shiki.matsu.io/) (github-light theme)
+- **Syntax Highlighting**: [Shiki](https://shiki.matsu.io/)
 - **Deployment**: GitHub Pages via GitHub Actions
 - **Package Manager**: npm
 - **Node Version**: 20+
@@ -185,11 +134,11 @@ git push origin main
 
 ## 📊 Features
 
-- ✅ **5 Blog Posts** with syntax highlighting
+- ✅ **Blog** with syntax highlighting and MDX support
 - ✅ **RSS Feed** at `/rss.xml`
 - ✅ **Sitemap** automatically generated
 - ✅ **SEO Optimized** with meta tags
-- ✅ **Fast Performance** (sub-second page loads)
+- ✅ **Fast Performance** (Zero JS by default)
 - ✅ **Mobile Responsive** design
 - ✅ **TypeScript** for type safety
 - ✅ **Automatic Deployments** via GitHub Actions
