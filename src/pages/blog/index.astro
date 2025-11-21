@@ -64,7 +64,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 
 			/* Category-based colored borders */
-			ul li a[data-category="notes"] {
+			ul li a {
 				border-left-color: var(--accent);
 			}
 
@@ -137,8 +137,6 @@ const posts = (await getCollection('blog')).sort(
 					border-top: 4px solid transparent;
 					padding-left: 0;
 					padding-top: 0.5rem;
-				}
-				ul li a[data-category="notes"] {
 					border-top-color: var(--accent);
 				}
 				ul li a[data-category="random"] {
