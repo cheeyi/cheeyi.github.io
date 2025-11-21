@@ -1,6 +1,8 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import PunchThroughLogo from '../../assets/punchthrough-logo.svg';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
@@ -163,7 +165,7 @@ const posts = (await getCollection('blog')).sort(
 
 			<div class="publications-section">
 				<div class="publication-card featured">
-					<div class="publication-icon">📚</div>
+					<Icon name="simple-icons:bluetooth" class="publication-icon" />
 					<div class="publication-content">
 						<h3 class="publication-title">
 							<a href="https://punchthrough.com/android-ble-guide/" target="_blank" rel="noopener noreferrer">
@@ -181,15 +183,15 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 
 				<div class="publication-card">
-					<div class="publication-icon">✍️</div>
+					<Image src={PunchThroughLogo} alt="Punch Through Logo" class="publication-icon" />
 					<div class="publication-content">
 						<h3 class="publication-title">
 							<a href="https://punchthrough.com/author/cong/" target="_blank" rel="noopener noreferrer">
-								Company Blog Posts
+								Punch Through Blog Posts
 							</a>
 						</h3>
 						<p class="publication-description">
-							Regular technical articles and insights on Bluetooth development, mobile engineering best practices, and lessons learned from client projects.
+							I periodically contribute to the Punch Through company blog, writing technical articles and insights on Bluetooth development, mobile engineering best practices, and lessons learned from client projects.
 						</p>
 						<div class="publication-meta">
 							<span class="publication-badge">Blog Series</span>
@@ -200,6 +202,14 @@ const posts = (await getCollection('blog')).sort(
 			</div>
 
 			<hr />
+			<br />
+
+			<h2>Personal Blog Posts</h2>
+
+			<p>
+				Here are my latest blog posts covering software engineering, and tech, and everyday life.
+			</p>
+
 			<br />
 
 			<section>

@@ -385,7 +385,9 @@ button:active, .button:active {
 }
 
 .publication-icon {
-	font-size: 2.5em;
+	width: 2.5rem;
+	height: 2.5rem;
+	font-size: 2.5rem; /* Fallback for font icons */
 	line-height: 1;
 	flex-shrink: 0;
 }
