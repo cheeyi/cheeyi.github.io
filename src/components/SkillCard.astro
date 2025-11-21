@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 export interface Skill {
 	name: string;
 	icon?: string;
@@ -20,9 +22,7 @@ const { category, skills } = Astro.props;
 			<div class="skill-card">
 				<div class="skill-content">
 					{skill.icon && (
-						<span class="skill-icon" role="img" aria-label={skill.name}>
-							{skill.icon}
-						</span>
+						<Icon name={skill.icon} class="skill-icon" aria-label={skill.name} />
 					)}
 					<span class="skill-name">{skill.name}</span>
 				</div>
@@ -107,7 +107,8 @@ const { category, skills } = Astro.props;
 	}
 
 	.skill-icon {
-		font-size: 2em;
+		width: 2rem;
+		height: 2rem;
 		line-height: 1;
 	}
 
@@ -139,7 +140,8 @@ const { category, skills } = Astro.props;
 		}
 
 		.skill-icon {
-			font-size: 1.5em;
+			width: 1.5rem;
+			height: 1.5rem;
 		}
 
 		.skill-name {
