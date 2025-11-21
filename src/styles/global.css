@@ -462,3 +462,19 @@ button:active, .button:active {
 		font-size: 0.9em;
 	}
 }
+
+/* Syntax Highlighting */
+pre.astro-code {
+	background-color: var(--bg-secondary) !important;
+	border: 1px solid rgba(var(--gray-light), 0.5);
+	border-radius: 8px;
+}
+
+[data-theme="dark"] pre.astro-code,
+[data-theme="dark"] pre.astro-code span {
+	background-color: var(--shiki-dark-bg) !important;
+	color: var(--shiki-dark) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
+}
