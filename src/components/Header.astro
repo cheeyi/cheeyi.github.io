@@ -13,15 +13,17 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/resume">Resume</HeaderLink>
 		</div>
 		<div class="header-actions">
-			<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-				<svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-					<circle cx="10" cy="10" r="4" fill="currentColor"/>
-					<path d="M10 0v4M10 16v4M20 10h-4M4 10H0M17.07 2.93l-2.83 2.83M5.76 14.24l-2.83 2.83M17.07 17.07l-2.83-2.83M5.76 5.76L2.93 2.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-				</svg>
-				<svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-					<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-				</svg>
-			</button>
+			{import.meta.env.DEV && (
+				<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+					<svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+						<circle cx="10" cy="10" r="4" fill="currentColor"/>
+						<path d="M10 0v4M10 16v4M20 10h-4M4 10H0M17.07 2.93l-2.83 2.83M5.76 14.24l-2.83 2.83M17.07 17.07l-2.83-2.83M5.76 5.76L2.93 2.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+					</svg>
+					<svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+						<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+					</svg>
+				</button>
+			)}
 			<div class="social-links">
 				<a href="https://linkedin.com/in/cheeyi/" target="_blank">
 					<span class="sr-only">Connect with me on LinkedIn</span>
