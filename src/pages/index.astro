@@ -4,6 +4,8 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import WaveDivider from '../components/WaveDivider.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { Image } from 'astro:assets';
+import profileImage from '../assets/profile.png';
 ---
 
 <!doctype html>
@@ -14,17 +16,19 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>Hi, I'm Chee Yi 👋</h1>
+			<div class="hero">
+				<h1>Hi, I'm Chee Yi 👋</h1>
+				<div class="hero-image">
+					<Image src={profileImage} alt="Chee Yi Ong" width={320} height={320} loading="eager" />
+				</div>
+			</div>
+
 			<p>
 				My first name is <em>Chee Yi</em> (that's two words), and my last name is <em>Ong</em>.
 			</p>
 
 			<p>
 				I'm a software engineer at <a href="https://punchthrough.com">Punch Through</a> working on projects with a focus on Bluetooth Low Energy connected devices. I love gaming, photography, food and travel. My hometown is a beautiful island in Malaysia called Penang.
-			</p>
-
-			<p>
-				<img src="/assets/images/profile.jpg" alt="Me" />
 			</p>
 
 			<p>
@@ -43,3 +47,46 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.hero {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+	.hero h1 {
+		margin-bottom: 0;
+	}
+	.hero-image {
+		flex-shrink: 0;
+	}
+	.hero-image img {
+		width: 160px;
+		height: 160px;
+		border-radius: 50%;
+		object-fit: cover;
+		box-shadow: var(--box-shadow);
+		border: 4px solid var(--bg-secondary);
+		transition: transform 0.3s ease;
+		/* Fix for downscaling artifacts */
+		image-rendering: -webkit-optimize-contrast;
+	}
+	.hero-image img:hover {
+		transform: scale(1.05) rotate(3deg);
+		border-color: var(--accent);
+	}
+	@media (max-width: 720px) {
+		.hero {
+			flex-direction: column-reverse;
+			text-align: center;
+			gap: 1.5rem;
+			justify-content: center;
+		}
+		.hero-image img {
+			width: 140px;
+			height: 140px;
+		}
+	}
+</style>
