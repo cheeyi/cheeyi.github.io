@@ -50,23 +50,11 @@ import HeaderLink from './HeaderLink.astro';
 	const themeToggle = document.getElementById('theme-toggle');
 	const html = document.documentElement;
 
-	// Check for saved theme preference or default to system preference
-	const getPreferredTheme = () => {
-		const savedTheme = localStorage.getItem('theme');
-		if (savedTheme) {
-			return savedTheme;
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-
 	// Set theme
 	const setTheme = (theme: string) => {
 		html.setAttribute('data-theme', theme);
 		localStorage.setItem('theme', theme);
 	};
-
-	// Initialize theme
-	setTheme(getPreferredTheme());
 
 	// Toggle theme on button click
 	themeToggle?.addEventListener('click', () => {
@@ -89,13 +77,13 @@ import HeaderLink from './HeaderLink.astro';
 		z-index: 100;
 		border-bottom: 1px solid rgba(var(--gray-light), 0.3);
 	}
-	
+
 	:global([data-theme="dark"]) header {
 		background: rgba(15, 20, 25, 0.9);
 		border-bottom: 1px solid rgba(55, 65, 81, 0.4);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 	}
-	
+
 	h2 {
 		margin: 0;
 		font-size: 1em;
