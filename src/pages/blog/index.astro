@@ -155,6 +155,53 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
+			<h2>Publications & Writing</h2>
+
+			<p>
+				External articles and posts authored by yours truly.
+			</p>
+
+			<div class="publications-section">
+				<div class="publication-card featured">
+					<div class="publication-icon">📚</div>
+					<div class="publication-content">
+						<h3 class="publication-title">
+							<a href="https://punchthrough.com/android-ble-guide/" target="_blank" rel="noopener noreferrer">
+								The Ultimate Guide to Android Bluetooth Low Energy
+							</a>
+						</h3>
+						<p class="publication-description">
+							My proudest work! An authoritative and comprehensive guide to Android BLE development, covering everything from basic concepts to advanced implementations. This resource has become a go-to reference for developers working with Bluetooth Low Energy on Android.
+						</p>
+						<div class="publication-meta">
+							<span class="publication-badge">Technical Guide</span>
+							<a href="https://punchthrough.com/android-ble-guide/" target="_blank" rel="noopener noreferrer" class="publication-link">punchthrough.com →</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="publication-card">
+					<div class="publication-icon">✍️</div>
+					<div class="publication-content">
+						<h3 class="publication-title">
+							<a href="https://punchthrough.com/author/cong/" target="_blank" rel="noopener noreferrer">
+								Company Blog Posts
+							</a>
+						</h3>
+						<p class="publication-description">
+							Regular technical articles and insights on Bluetooth development, mobile engineering best practices, and lessons learned from client projects.
+						</p>
+						<div class="publication-meta">
+							<span class="publication-badge">Blog Series</span>
+							<a href="https://punchthrough.com/author/cong/" target="_blank" rel="noopener noreferrer" class="publication-link">View all posts →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr />
+			<br />
+
 			<section>
 				<ul>
 					{

@@ -1,25 +1,33 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
 import Timeline from '../components/Timeline.astro';
+import SkillCard from '../components/SkillCard.astro';
 import type { TimelineItem } from '../components/Timeline.astro';
+import {
+	architectureSkills,
+	bluetoothSkills,
+	devSkills,
+	languageSkills,
+	medicalDeviceSkills,
+} from '../data/skills';
 
 // Punch Through career timeline
 const punchThroughTimeline: TimelineItem[] = [
 	{
 		title: 'Principal Software Engineer',
 		period: 'May 2023 - Present · 2 yrs 7 mos',
-		location: 'Remote · Remote',
+		location: 'Remote',
 		isCurrent: true,
 		responsibilities: [
 			'My role as technical lead on mobile projects allows me to focus on system design and architecture, requirements planning, and technical leadership',
-			'Spearheading and advocating for best practices in system and technical architecture',
-			'FDA medical device software, IEC62304, and other formal documentation needs for high-stakes software projects',
+			'Spearheading and advocating for best practices in system and technical architecture by mentoring Senior Engineers on the team',
+			'FDA medical device software, IEC 62304, and other formal documentation needs for high-stakes software projects',
 		],
 	},
 	{
 		title: 'Senior Software Engineer',
 		period: 'May 2020 - May 2023 · 3 yrs 1 mo',
-		location: 'Remote · Remote',
+		location: 'Remote',
 		isCurrent: false,
 		responsibilities: [
 			'Technical lead and individual contributor on internal and external client projects, primary communicator to both internal and external stakeholders',
@@ -32,14 +40,14 @@ const punchThroughTimeline: TimelineItem[] = [
 	},
 	{
 		title: 'Software Engineer',
-		period: 'Mar 2018 - May 2020 · 2 yrs 3 mos',
-		location: 'Remote · Remote',
+		period: 'May 2017 - May 2020 · 3 yrs',
+		location: 'Minneapolis, MN (Remote after Apr 2018)',
 		isCurrent: false,
 		responsibilities: [
-			'Continued working on both client and internal-facing projects related to BLE and connected products',
-			'Auditing client projects with BLE issues',
-			'Experience implementing over-the-air firmware updates, BLE throughput optimizations, unit-tested mobile BLE SDKs',
-			'Contributing to company blog posts: https://punchthrough.com/author/cong/',
+			'Worked on both client and internal-facing projects related to BLE and connected products',
+			'Audited several client projects with BLE issues',
+			'Experienced implementing over-the-air firmware updates, BLE throughput optimizations, unit-tested mobile BLE SDKs',
+			'Contributed to company blog posts: https://punchthrough.com/author/cong/',
 		],
 	},
 ];
@@ -54,10 +62,25 @@ const punchThroughTimeline: TimelineItem[] = [
 		<p>Note: You can download a traditional PDF of my résumé <strong><a href="/assets/docs/resume.pdf" target="_blank">here</a></strong>.</p>
 	</blockquote>
 
+	<br />
+
+	<h1>Skills & Technologies</h1>
+
+	<div class="skills-section">
+		<SkillCard category="Technical Development" skills={devSkills} />
+		<SkillCard category="Programming Languages" skills={languageSkills} />
+		<SkillCard category="Bluetooth & IoT" skills={bluetoothSkills} />
+		<SkillCard category="Architecture & Leadership" skills={architectureSkills} />
+		<SkillCard category="Medical Device Software" skills={medicalDeviceSkills} />
+	</div>
+
+	<hr />
+	<br />
+
 	<h1>Professional Work Experience</h1>
 
 	<p>
-		As someone who graduated university in 2015, I'm still pretty new to the workforce, but I think I've gained lots of valuable experience over the past few years. I can be contacted via email at cheeyi[a#t]g#mail[d#ot]com. Here's what I've been up to lately (in reverse chronological order):
+		I can be contacted via email at cheeyi[a#t]g#mail[d#ot]com. Here's what I've been up to lately (in reverse chronological order):
 	</p>
 
 	<h2>Punch Through</h2>
@@ -67,7 +90,7 @@ const punchThroughTimeline: TimelineItem[] = [
 	</p>
 
 	<p>
-		Punch Through is a small startup-sized engineering and product development firm that specializes in building Bluetooth connected products—specifically BLE (Bluetooth Low Energy) products. I write Android, macOS and iOS apps here for the company's internal products as well as for external client projects.
+		Punch Through is a medtech engineering and product development firm that specializes in building Bluetooth connected products—specifically BLE (Bluetooth Low Energy) products. We work on medical device software and architecture projects, ranging from small prototypes to full-fledged FDA-compliant medical device software systems.
 	</p>
 
 	<p>
@@ -85,10 +108,6 @@ const punchThroughTimeline: TimelineItem[] = [
 
 	<h3>My Journey at Punch Through</h3>
 	<Timeline items={punchThroughTimeline} />
-
-	<p>
-		After I left the U.S. in April 2018, I still maintain a great working relationship with Punch Through as a remote team member.
-	</p>
 
 	<h2>Expedia</h2>
 
