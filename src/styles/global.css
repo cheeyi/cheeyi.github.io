@@ -27,6 +27,7 @@
 }
 
 [data-theme="dark"] {
+	color-scheme: dark;
 	/* Dark mode colors */
 	--black: 229, 233, 240;
 	--gray: 156, 163, 175;
@@ -70,13 +71,20 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+html {
+	background-color: var(--bg-primary);
+}
+
 body {
 	font-family: "Atkinson", sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
+	min-height: 100vh;
 	background-color: var(--bg-primary);
+	background-image: linear-gradient(var(--gray-gradient));
+	background-repeat: no-repeat;
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
