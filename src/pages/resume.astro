@@ -10,12 +10,14 @@ import {
 	languageSkills,
 	medicalDeviceSkills,
 } from '../data/skills';
+import { calculateDuration } from '../utils/date';
 
 // Punch Through career timeline
+const principalStartDate = new Date('2023-05-01');
 const punchThroughTimeline: TimelineItem[] = [
 	{
 		title: 'Principal Software Engineer',
-		period: 'May 2023 - Present · 2 yrs 7 mos',
+		period: `May 2023 - Present · ${calculateDuration(principalStartDate)}`,
 		location: 'Remote',
 		isCurrent: true,
 		responsibilities: [
@@ -26,7 +28,7 @@ const punchThroughTimeline: TimelineItem[] = [
 	},
 	{
 		title: 'Senior Software Engineer',
-		period: 'May 2020 - May 2023 · 3 yrs 1 mo',
+		period: 'May 2020 - May 2023 · 3 yrs',
 		location: 'Remote',
 		isCurrent: false,
 		responsibilities: [
