@@ -93,6 +93,7 @@ body {
 	line-height: 1.7;
 	scroll-behavior: smooth;
 	position: relative;
+	z-index: 0;
 }
 
 /* Animated gradient background accent */
