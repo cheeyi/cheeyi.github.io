@@ -32,19 +32,19 @@
 
 [data-theme="dark"] {
 	color-scheme: dark;
-	--accent: #60a5fa;
-	--accent-hover: #93c5fd;
+	--accent: #7ab8ff;
+	--accent-hover: #a8cfff;
 
 	/* Dark mode neutrals */
-	--black: 229, 233, 240;
-	--gray: 156, 163, 175;
-	--gray-light: 55, 65, 81;
-	--gray-dark: 209, 213, 219;
+	--black: 241, 245, 249;
+	--gray: 148, 163, 184;
+	--gray-light: 71, 85, 105;
+	--gray-dark: 226, 232, 240;
 	--bg-primary: #0f1419;
-	--bg-secondary: #1a1f2e;
+	--bg-secondary: #1e2638;
 	--box-shadow: 0 2px 6px rgba(0, 0, 0, 40%);
 
-	--accent-tint: color-mix(in srgb, var(--accent) 20%, transparent);
+	--accent-tint: color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 /* Respect user motion preferences */
