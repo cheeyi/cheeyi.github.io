@@ -1,0 +1,200 @@
+---
+// TEMPORARY debug accent picker — remove before merging to main.
+// Click a numbered swatch to override --accent/--accent-hover for that
+// mode. Selections persist in localStorage across page loads.
+const palettes = [
+	{ name: 'Royal Blue', light: ['#1d4ed8', '#1e40af'], dark: ['#7ab8ff', '#a8cfff'] },
+	{ name: 'Azure', light: ['#0369a1', '#075985'], dark: ['#38bdf8', '#7dd3fc'] },
+	{ name: 'Indigo', light: ['#4f46e5', '#4338ca'], dark: ['#818cf8', '#a5b4fc'] },
+	{ name: 'Teal', light: ['#0d9488', '#0f766e'], dark: ['#2dd4bf', '#5eead4'] },
+	{ name: 'Amber', light: ['#c2410c', '#9a3412'], dark: ['#fb923c', '#fdba74'] },
+	{ name: 'Rose', light: ['#be123c', '#9f1239'], dark: ['#fb7185', '#fda4af'] },
+];
+---
+
+<div id="debug-picker" data-palettes={JSON.stringify(palettes)}>
+	<div class="picker-title">Accent picker (temp)</div>
+	<div class="picker-row">
+		<span class="picker-label">Light</span>
+		<div class="swatches">
+			{palettes.map((p, i) => (
+				<button
+					class="swatch light-swatch"
+					data-mode="light"
+					data-index={i}
+					title={`Light ${i + 1}: ${p.name}`}
+					style={`background:${p.light[0]}`}
+				>
+					{i + 1}
+				</button>
+			))}
+		</div>
+	</div>
+	<div class="picker-row">
+		<span class="picker-label">Dark</span>
+		<div class="swatches">
+			{palettes.map((p, i) => (
+				<button
+					class="swatch dark-swatch"
+					data-mode="dark"
+					data-index={i}
+					title={`Dark ${i + 1}: ${p.name}`}
+					style={`background:${p.dark[0]}`}
+				>
+					{i + 1}
+				</button>
+			))}
+		</div>
+	</div>
+	<div class="picker-status" id="picker-status">No overrides</div>
+	<button class="picker-reset" id="picker-reset">Reset</button>
+</div>
+
+<script>
+	const picker = document.getElementById('debug-picker')!;
+	const palettes = JSON.parse(picker.dataset.palettes!) as {
+		name: string;
+		light: string[];
+		dark: string[];
+	}[];
+
+	let styleEl = document.getElementById('debug-theme-overrides');
+	if (!styleEl) {
+		styleEl = document.createElement('style');
+		styleEl.id = 'debug-theme-overrides';
+		document.head.appendChild(styleEl);
+	}
+
+	const apply = () => {
+		const li = localStorage.getItem('debug-accent-light');
+		const di = localStorage.getItem('debug-accent-dark');
+		let css = '';
+		if (li !== null) {
+			const [accent, hover] = palettes[+li].light;
+			css += `:root{--accent:${accent};--accent-hover:${hover};}`;
+		}
+		if (di !== null) {
+			const [accent, hover] = palettes[+di].dark;
+			css += `[data-theme="dark"]{--accent:${accent};--accent-hover:${hover};}`;
+		}
+		styleEl!.textContent = css;
+
+		picker.querySelectorAll<HTMLButtonElement>('.swatch').forEach((btn) => {
+			const selected = localStorage.getItem(`debug-accent-${btn.dataset.mode}`);
+			btn.classList.toggle('selected', selected === btn.dataset.index);
+		});
+
+		const fmt = (idx: string | null, mode: 'light' | 'dark') =>
+			idx === null ? 'default' : `${+idx + 1} (${palettes[+idx].name})`;
+		document.getElementById('picker-status')!.textContent =
+			`Light: ${fmt(li, 'light')} · Dark: ${fmt(di, 'dark')}`;
+	};
+
+	picker.querySelectorAll<HTMLButtonElement>('.swatch').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			localStorage.setItem(`debug-accent-${btn.dataset.mode}`, btn.dataset.index!);
+			apply();
+		});
+	});
+
+	document.getElementById('picker-reset')!.addEventListener('click', () => {
+		localStorage.removeItem('debug-accent-light');
+		localStorage.removeItem('debug-accent-dark');
+		apply();
+	});
+
+	apply();
+</script>
+
+<style>
+	#debug-picker {
+		position: fixed;
+		bottom: 1rem;
+		right: 1rem;
+		z-index: 1000;
+		background: var(--bg-secondary);
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 10px;
+		padding: 0.75rem;
+		box-shadow: var(--box-shadow);
+		font-size: 0.7rem;
+		color: rgb(var(--gray-dark));
+		width: 220px;
+	}
+
+	.picker-title {
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.picker-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.picker-label {
+		width: 2.2rem;
+		flex-shrink: 0;
+		color: rgb(var(--gray));
+	}
+
+	.swatches {
+		display: flex;
+		gap: 0.3rem;
+	}
+
+	.swatch {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		border: 2px solid transparent;
+		cursor: pointer;
+		font-size: 0.65rem;
+		font-weight: 700;
+		padding: 0;
+		line-height: 1;
+	}
+
+	.light-swatch {
+		color: #ffffff;
+	}
+
+	.dark-swatch {
+		color: #0f1419;
+	}
+
+	.swatch.selected {
+		border-color: rgb(var(--black));
+		transform: scale(1.15);
+	}
+
+	.picker-status {
+		margin: 0.5rem 0 0.4rem;
+		color: rgb(var(--gray));
+	}
+
+	.picker-reset {
+		background: none;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 6px;
+		padding: 0.2rem 0.6rem;
+		cursor: pointer;
+		color: rgb(var(--gray-dark));
+		font-size: 0.7rem;
+	}
+
+	.picker-reset:hover {
+		border-color: var(--accent);
+	}
+
+	@media (max-width: 720px) {
+		#debug-picker {
+			bottom: 0.5rem;
+			right: 0.5rem;
+		}
+	}
+</style>
