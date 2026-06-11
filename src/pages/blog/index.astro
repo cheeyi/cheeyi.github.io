@@ -7,7 +7,6 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import WaveDivider from '../../components/WaveDivider.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -36,7 +35,6 @@ const posts = (await getCollection('blog')).sort(
 			}
 			ul li * {
 				text-decoration: none;
-				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 			}
 			ul li:first-child {
 				width: 100%;
@@ -52,24 +50,14 @@ const posts = (await getCollection('blog')).sort(
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
-				will-change: transform;
 			}
 			ul li a {
 				display: block;
 				position: relative;
-				border-left: 4px solid transparent;
+				border-left: 3px solid rgb(var(--gray-light));
 				padding-left: 1rem;
 				border-radius: 8px;
-				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			/* Category-based colored borders */
-			ul li a {
-				border-left-color: var(--accent);
-			}
-
-			ul li a[data-category="random"] {
-				border-left-color: var(--accent-secondary);
+				transition: border-color 0.2s ease;
 			}
 
 			.category-tag {
@@ -81,42 +69,26 @@ const posts = (await getCollection('blog')).sort(
 				padding: 0.25rem 0.75rem;
 				border-radius: 20px;
 				margin-bottom: 0.5rem;
-				background: var(--gradient-primary);
-				color: white;
-			}
-
-			.category-tag.random {
-				background: var(--accent-secondary);
+				background: var(--accent-tint);
+				color: var(--accent);
 			}
 
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
 				line-height: 1;
+				transition: color 0.2s ease;
 			}
 			.date {
 				margin: 0;
 				color: rgb(var(--gray));
 			}
 			ul li a:hover {
-				transform: translateY(-8px) rotate(0.5deg);
-				border-left-width: 6px;
-				padding-left: calc(1rem - 2px);
+				border-left-color: var(--accent);
 			}
 
-			ul li a:hover h4,
-			ul li a:hover .date {
+			ul li a:hover .title {
 				color: var(--accent);
-			}
-
-			ul li a[data-category="random"]:hover h4,
-			ul li a[data-category="random"]:hover .date {
-				color: var(--accent-secondary);
-			}
-
-			ul a:hover img {
-				box-shadow: var(--box-shadow-colored);
-				transform: scale(1.02);
 			}
 			@media (max-width: 720px) {
 				ul {
@@ -134,20 +106,12 @@ const posts = (await getCollection('blog')).sort(
 				}
 				ul li a {
 					border-left: none;
-					border-top: 4px solid transparent;
+					border-top: 3px solid rgb(var(--gray-light));
 					padding-left: 0;
 					padding-top: 0.5rem;
-					border-top-color: var(--accent);
-				}
-				ul li a[data-category="random"] {
-					border-top-color: var(--accent-secondary);
 				}
 				ul li a:hover {
-					transform: translateY(-4px);
-					border-left-width: 0;
-					border-top-width: 6px;
-					padding-left: 0;
-					padding-top: calc(0.5rem - 2px);
+					border-top-color: var(--accent);
 				}
 			}
 		</style>
@@ -233,7 +197,6 @@ const posts = (await getCollection('blog')).sort(
 				</ul>
 			</section>
 		</main>
-		<WaveDivider />
 		<Footer />
 	</body>
 </html>

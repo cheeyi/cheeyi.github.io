@@ -4,47 +4,47 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+/* ============================================================
+   Theme tokens
+   ------------------------------------------------------------
+   To retheme the site, change --accent and --accent-hover in
+   :root (light mode) and [data-theme="dark"] below. Every
+   accent-colored element (links, badges, buttons, borders)
+   derives from these two variables; tinted backgrounds are
+   computed from them via color-mix().
+   ============================================================ */
 :root {
-	/* Vibrant gradient palette */
-	--accent: #a855f7; /* Purple */
-	--accent-secondary: #06b6d4; /* Cyan */
-	--accent-dark: #7c3aed; /* Darker purple */
-	--gradient-primary: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
-	--gradient-accent: linear-gradient(90deg, #a855f7, #ec4899, #06b6d4);
+	--accent: #2563eb; /* links, badges, active states */
+	--accent-hover: #1d4ed8; /* link/button hover */
 
-	/* Light mode colors */
+	/* Light mode neutrals */
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
 	--bg-primary: #ffffff;
 	--bg-secondary: #f8fafc;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
-	--box-shadow-colored: 0 8px 32px rgba(168, 85, 247, 0.15);
+	--box-shadow: 0 2px 6px rgba(var(--gray), 20%);
+
+	/* Derived accent tints — no need to touch when retheming */
+	--accent-tint: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 [data-theme="dark"] {
 	color-scheme: dark;
-	/* Dark mode colors */
+	--accent: #60a5fa;
+	--accent-hover: #93c5fd;
+
+	/* Dark mode neutrals */
 	--black: 229, 233, 240;
 	--gray: 156, 163, 175;
 	--gray-light: 55, 65, 81;
 	--gray-dark: 209, 213, 219;
 	--bg-primary: #0f1419;
 	--bg-secondary: #1a1f2e;
-	--gray-gradient: rgba(26, 31, 46, 50%), #0f1419;
-	--box-shadow:
-		0 2px 6px rgba(0, 0, 0, 40%), 0 8px 24px rgba(0, 0, 0, 50%), 0 16px 32px
-		rgba(0, 0, 0, 50%);
-	--box-shadow-colored: 0 8px 32px rgba(168, 85, 247, 0.3);
-}
+	--box-shadow: 0 2px 6px rgba(0, 0, 0, 40%);
 
-/* Smooth color transitions */
-* {
-	transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+	--accent-tint: color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 /* Respect user motion preferences */
@@ -83,69 +83,14 @@ body {
 	text-align: left;
 	min-height: 100vh;
 	background-color: var(--bg-primary);
-	background-image: linear-gradient(var(--gray-gradient));
-	background-repeat: no-repeat;
-	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
 	scroll-behavior: smooth;
-	position: relative;
-	z-index: 0;
 }
 
-/* Animated gradient background accent */
-body::before {
-	content: '';
-	position: fixed;
-	top: -50%;
-	left: -50%;
-	width: 200%;
-	height: 200%;
-	background: radial-gradient(
-		circle at 20% 50%,
-		rgba(168, 85, 247, 0.1) 0%,
-		transparent 50%
-	),
-	radial-gradient(
-		circle at 80% 80%,
-		rgba(6, 182, 212, 0.1) 0%,
-		transparent 50%
-	);
-	animation: gradient-move 15s ease infinite;
-	z-index: -1;
-	pointer-events: none;
-}
-
-@keyframes gradient-move {
-	0%, 100% {
-		transform: translate(0, 0) rotate(0deg);
-	}
-	33% {
-		transform: translate(10%, -10%) rotate(120deg);
-	}
-	66% {
-		transform: translate(-10%, 10%) rotate(240deg);
-	}
-}
-
-/* Playful cursor effect for desktop */
-@media (pointer: fine) {
-	body {
-		cursor: default;
-	}
-
-	a, button {
-		cursor: pointer;
-		position: relative;
-	}
-
-	a:hover, button:hover {
-		cursor: pointer;
-	}
-}
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
@@ -163,13 +108,11 @@ h6 {
 	line-height: 1.2;
 }
 
-/* Add subtle accent to headings in blog posts */
+/* Subtle separator under blog post section headings */
 .prose h2,
 .prose h3 {
 	padding-bottom: 0.3em;
-	border-bottom: 2px solid transparent;
-	border-image: var(--gradient-primary) 1;
-	border-image-slice: 1;
+	border-bottom: 1px solid rgb(var(--gray-light));
 	margin-top: 1.5em;
 }
 h1 {
@@ -193,25 +136,17 @@ b {
 }
 a {
 	color: var(--accent);
-	text-decoration: none;
-	position: relative;
-	transition: color 0.3s ease;
+	text-decoration: underline;
+	text-decoration-color: rgba(var(--gray), 0.4);
+	text-underline-offset: 2px;
+	transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 a:hover {
-	color: var(--accent-secondary);
+	color: var(--accent-hover);
+	text-decoration-color: currentColor;
 }
-a:not(nav a)::after {
-	content: '';
-	position: absolute;
-	width: 0;
-	height: 2px;
-	bottom: -2px;
-	left: 0;
-	background: var(--gradient-primary);
-	transition: width 0.3s ease;
-}
-a:not(nav a):hover::after {
-	width: 100%;
+nav a {
+	text-decoration: none;
 }
 p {
 	margin-bottom: 1em;
@@ -251,10 +186,8 @@ pre > code {
 }
 blockquote {
 	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-	background: linear-gradient(90deg, rgba(168, 85, 247, 0.05), transparent);
+	background-color: var(--bg-secondary);
+	margin: 0;
 	padding: 1em 1.5em;
 	border-radius: 0 8px 8px 0;
 }
@@ -289,68 +222,6 @@ hr {
 	white-space: nowrap;
 }
 
-/* Animations and micro-interactions */
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes slideInLeft {
-	from {
-		opacity: 0;
-		transform: translateX(-30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-@keyframes float {
-	0%, 100% {
-		transform: translateY(0);
-	}
-	50% {
-		transform: translateY(-10px);
-	}
-}
-
-/* Page entrance animation */
-main {
-	animation: fadeIn 0.6s ease-out;
-}
-
-/* Staggered fade-in for list items */
-ul li {
-	animation: fadeIn 0.6s ease-out backwards;
-}
-
-ul li:nth-child(1) { animation-delay: 0.1s; }
-ul li:nth-child(2) { animation-delay: 0.2s; }
-ul li:nth-child(3) { animation-delay: 0.3s; }
-ul li:nth-child(4) { animation-delay: 0.4s; }
-ul li:nth-child(5) { animation-delay: 0.5s; }
-ul li:nth-child(6) { animation-delay: 0.6s; }
-
-/* Hover effects */
-button, .button {
-	transition: all 0.3s ease;
-}
-
-button:hover, .button:hover {
-	transform: translateY(-2px);
-}
-
-button:active, .button:active {
-	transform: translateY(0);
-}
-
 /* Skills Section */
 .skills-section {
 	margin: 2rem 0 3rem 0;
@@ -365,31 +236,20 @@ button:active, .button:active {
 
 .publication-card {
 	background: var(--bg-secondary);
-	border: 2px solid rgba(var(--gray-light), 0.3);
+	border: 1px solid rgb(var(--gray-light));
 	border-radius: 12px;
 	padding: 1.5rem;
-	transition: all 0.3s ease;
+	transition: border-color 0.2s ease;
 	display: flex;
 	gap: 1.5rem;
 	align-items: flex-start;
-	animation: fadeIn 0.6s ease-out backwards;
 }
 
-.publication-card:nth-child(1) { animation-delay: 0.1s; }
-.publication-card:nth-child(2) { animation-delay: 0.2s; }
-
 .publication-card.featured {
-	border: 2px solid transparent;
-	border-radius: 12px;
-	background:
-		linear-gradient(135deg, rgba(168, 85, 247, 0.05), rgba(6, 182, 212, 0.05)) padding-box,
-		linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
-		var(--gradient-primary) border-box;
+	border-color: var(--accent);
 }
 
 .publication-card:hover {
-	transform: translateY(-4px);
-	box-shadow: var(--box-shadow-colored);
 	border-color: var(--accent);
 }
 
@@ -413,15 +273,11 @@ button:active, .button:active {
 
 .publication-title a {
 	color: rgb(var(--black));
-	background: var(--gradient-primary);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
 	text-decoration: none;
 }
 
 .publication-title a:hover {
-	opacity: 0.8;
+	color: var(--accent);
 }
 
 .publication-description {
@@ -441,8 +297,8 @@ button:active, .button:active {
 .publication-badge {
 	display: inline-block;
 	padding: 0.25rem 0.75rem;
-	background: var(--gradient-primary);
-	color: white;
+	background: var(--accent-tint);
+	color: var(--accent);
 	border-radius: 20px;
 	font-size: 0.75em;
 	font-weight: 600;

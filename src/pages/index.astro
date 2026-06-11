@@ -2,7 +2,6 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import WaveDivider from '../components/WaveDivider.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { Image } from 'astro:assets';
 import profileImage from '../assets/profile.png';
@@ -43,7 +42,6 @@ import profileImage from '../assets/profile.png';
 				I occasionally write about software engineering, mobile development, and tech. Check out my <a href="/blog">blog</a> for the latest posts.
 			</p>
 		</main>
-		<WaveDivider />
 		<Footer />
 	</body>
 </html>
@@ -69,13 +67,8 @@ import profileImage from '../assets/profile.png';
 		object-fit: cover;
 		box-shadow: var(--box-shadow);
 		border: 4px solid var(--bg-secondary);
-		transition: transform 0.3s ease;
 		/* Fix for downscaling artifacts */
 		image-rendering: -webkit-optimize-contrast;
-	}
-	.hero-image img:hover {
-		transform: scale(1.05) rotate(3deg);
-		border-color: var(--accent);
 	}
 	@media (max-width: 720px) {
 		.hero {
