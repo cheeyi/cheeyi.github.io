@@ -80,9 +80,11 @@ const { title, description, pubDate, updatedDate, heroImage, categories } = Astr
 				</div>
 				<div class="prose">
 					<div class="title">
-						<span class={`category-badge ${categories}`}>
-							{categories}
-						</span>
+						{categories && (
+							<span class={`category-badge ${categories}`}>
+								{categories}
+							</span>
+						)}
 						<div class="date">
 							<FormattedDate date={pubDate} />
 							{
