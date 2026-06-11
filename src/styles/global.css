@@ -14,8 +14,8 @@
    computed from them via color-mix().
    ============================================================ */
 :root {
-	--accent: #1d4ed8; /* links, badges, active states */
-	--accent-hover: #1e40af; /* link/button hover */
+	--accent: #0369a1; /* links, badges, active states */
+	--accent-hover: #075985; /* link/button hover */
 
 	/* Light mode neutrals */
 	--black: 15, 18, 25;
@@ -32,8 +32,8 @@
 
 [data-theme="dark"] {
 	color-scheme: dark;
-	--accent: #7ab8ff;
-	--accent-hover: #a8cfff;
+	--accent: #38bdf8;
+	--accent-hover: #7dd3fc;
 
 	/* Dark mode neutrals */
 	--black: 241, 245, 249;
