@@ -21,22 +21,18 @@ const url = `https://github.com/${repo}`;
 <style>
 	.repo-card {
 		display: block;
-		border: 1px solid var(--gray-light);
+		border: 1px solid rgb(var(--gray-light));
 		border-radius: 12px;
 		padding: 1.5rem;
 		text-decoration: none;
 		color: rgb(var(--black));
 		background: var(--bg-secondary);
-		transition: all 0.3s ease;
+		transition: border-color 0.2s ease;
 		margin: 2rem 0;
-		position: relative;
-		overflow: hidden;
 	}
 
 	.repo-card:hover {
 		border-color: var(--accent);
-		transform: translateY(-2px);
-		box-shadow: var(--box-shadow-colored);
 	}
 
 	.repo-header {

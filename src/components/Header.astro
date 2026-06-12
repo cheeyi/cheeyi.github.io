@@ -13,17 +13,15 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/resume">Resume</HeaderLink>
 		</div>
 		<div class="header-actions">
-			{import.meta.env.DEV && (
-				<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-					<svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-						<circle cx="10" cy="10" r="4" fill="currentColor"/>
-						<path d="M10 0v4M10 16v4M20 10h-4M4 10H0M17.07 2.93l-2.83 2.83M5.76 14.24l-2.83 2.83M17.07 17.07l-2.83-2.83M5.76 5.76L2.93 2.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-					</svg>
-					<svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-						<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-					</svg>
-				</button>
-			)}
+			<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+				<svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+					<circle cx="10" cy="10" r="4" fill="currentColor"/>
+					<path d="M10 0v4M10 16v4M20 10h-4M4 10H0M17.07 2.93l-2.83 2.83M5.76 14.24l-2.83 2.83M17.07 17.07l-2.83-2.83M5.76 5.76L2.93 2.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+				<svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+					<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+				</svg>
+			</button>
 			<div class="social-links">
 				<a href="https://linkedin.com/in/cheeyi/" target="_blank">
 					<span class="sr-only">Connect with me on LinkedIn</span>
@@ -61,7 +59,7 @@ import HeaderLink from './HeaderLink.astro';
 	header {
 		margin: 0;
 		padding: 0 1em;
-		background: rgba(255, 255, 255, 0.7);
+		background: color-mix(in srgb, var(--bg-primary) 70%, transparent);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
@@ -72,7 +70,7 @@ import HeaderLink from './HeaderLink.astro';
 	}
 
 	:global([data-theme="dark"]) header {
-		background: rgba(15, 20, 25, 0.9);
+		background: color-mix(in srgb, var(--bg-primary) 90%, transparent);
 		border-bottom: 1px solid rgba(55, 65, 81, 0.4);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 	}
@@ -84,18 +82,12 @@ import HeaderLink from './HeaderLink.astro';
 
 	h2 a.logo {
 		text-decoration: none;
-		background: var(--gradient-accent);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+		color: rgb(var(--black));
 		font-weight: 700;
-		background-size: 200% auto;
-		animation: gradient-shift 3s ease infinite;
 	}
 
-	@keyframes gradient-shift {
-		0%, 100% { background-position: 0% center; }
-		50% { background-position: 100% center; }
+	h2 a.logo:hover {
+		color: var(--accent);
 	}
 
 	h2 a.active {
@@ -123,35 +115,24 @@ import HeaderLink from './HeaderLink.astro';
 	nav a {
 		padding: 1em 0.5em;
 		color: rgb(var(--black));
-		border-bottom: 4px solid transparent;
 		text-decoration: none;
 		position: relative;
-		transition: all 0.3s ease;
+		transition: color 0.2s ease;
 	}
 
-	nav a:not(.logo)::after {
-		content: '';
-		position: absolute;
-		width: 0;
-		height: 3px;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		background: var(--gradient-primary);
-		transition: width 0.3s ease;
-	}
-
-	nav a:not(.logo):hover::after {
-		width: 80%;
+	nav a:not(.logo):hover {
+		color: var(--accent);
 	}
 
 	nav a.active::after {
+		content: '';
+		position: absolute;
 		width: 80%;
-	}
-
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: transparent;
+		height: 2px;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--accent);
 	}
 
 	/* Dark mode toggle button */
@@ -166,14 +147,12 @@ import HeaderLink from './HeaderLink.astro';
 		align-items: center;
 		justify-content: center;
 		color: rgb(var(--black));
-		transition: all 0.3s ease;
+		transition: border-color 0.2s ease;
 		padding: 0;
 	}
 
 	#theme-toggle:hover {
 		border-color: var(--accent);
-		transform: rotate(20deg) scale(1.1);
-		box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
 	}
 
 	.sun-icon {
@@ -199,16 +178,10 @@ import HeaderLink from './HeaderLink.astro';
 	}
 
 	.social-links a {
-		transition: all 0.3s ease;
-		border-bottom: none;
-	}
-
-	.social-links a::after {
-		display: none;
+		transition: color 0.2s ease;
 	}
 
 	.social-links a:hover {
-		transform: translateY(-3px);
 		color: var(--accent);
 	}
 
