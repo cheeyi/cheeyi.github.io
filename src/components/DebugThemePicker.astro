@@ -1,0 +1,268 @@
+---
+// TEMPORARY debug accent picker — remove before merging to main.
+// Numbered swatches override --accent/--accent-hover per mode (tinted
+// backgrounds derive automatically via color-mix in global.css). With
+// "link modes" on (default), one click sets both the light and dark
+// variant of a palette; toggle it off to mix and match. Selections
+// persist in localStorage; Reset clears.
+//
+// Each palette: light [accent, hover] tuned for white backgrounds,
+// dark [accent, hover] tuned for #0f1419. Vivid hue wheel first
+// (1-15), then muted/editorial options (16-22).
+const palettes = [
+	{ name: 'Azure', light: ['#0369a1', '#075985'], dark: ['#38bdf8', '#7dd3fc'] }, // current default
+	{ name: 'Royal', light: ['#1d4ed8', '#1e40af'], dark: ['#60a5fa', '#93c5fd'] },
+	{ name: 'Indigo', light: ['#4f46e5', '#4338ca'], dark: ['#818cf8', '#a5b4fc'] },
+	{ name: 'Violet', light: ['#7c3aed', '#6d28d9'], dark: ['#a78bfa', '#c4b5fd'] },
+	{ name: 'Orchid', light: ['#a21caf', '#86198f'], dark: ['#e879f9', '#f0abfc'] },
+	{ name: 'Berry', light: ['#9d174d', '#831843'], dark: ['#f472b6', '#f9a8d4'] },
+	{ name: 'Rose', light: ['#be123c', '#9f1239'], dark: ['#fb7185', '#fda4af'] },
+	{ name: 'Crimson', light: ['#b91c1c', '#991b1b'], dark: ['#f87171', '#fca5a5'] },
+	{ name: 'Ember', light: ['#c2410c', '#9a3412'], dark: ['#fb923c', '#fdba74'] },
+	{ name: 'Gold', light: ['#b45309', '#92400e'], dark: ['#fbbf24', '#fcd34d'] },
+	{ name: 'Moss', light: ['#4d7c0f', '#3f6212'], dark: ['#a3e635', '#bef264'] },
+	{ name: 'Forest', light: ['#166534', '#14532d'], dark: ['#4ade80', '#86efac'] },
+	{ name: 'Emerald', light: ['#047857', '#065f46'], dark: ['#34d399', '#6ee7b7'] },
+	{ name: 'Teal', light: ['#0f766e', '#115e59'], dark: ['#2dd4bf', '#5eead4'] },
+	{ name: 'Cyan', light: ['#0e7490', '#155e75'], dark: ['#22d3ee', '#67e8f9'] },
+	{ name: 'Denim', light: ['#33597d', '#284662'], dark: ['#8fb4d9', '#b3cde6'] },
+	{ name: 'Mauve', light: ['#6b4f7a', '#574063'], dark: ['#c0a4cf', '#d6c2e0'] },
+	{ name: 'Sage', light: ['#3f6f5f', '#335a4d'], dark: ['#9fc5b5', '#c0dacf'] },
+	{ name: 'Ochre', light: ['#8a6116', '#6e4d10'], dark: ['#d9b36a', '#e6cb96'] },
+	{ name: 'Espresso', light: ['#78350f', '#5a280b'], dark: ['#dba874', '#ecc89e'] },
+	{ name: 'Steel', light: ['#475569', '#334155'], dark: ['#94a3b8', '#cbd5e1'] },
+	{ name: 'Graphite', light: ['#3f3f46', '#27272a'], dark: ['#a1a1aa', '#d4d4d8'] },
+];
+---
+
+<div id="debug-picker" data-palettes={JSON.stringify(palettes)}>
+	<div class="picker-header">
+		<span class="picker-title">Accent picker (temp)</span>
+		<button class="picker-collapse" id="picker-collapse" title="Collapse">–</button>
+	</div>
+	<div class="picker-body">
+		{['light', 'dark'].map((mode) => (
+			<div class="picker-group">
+				<span class="picker-label">{mode}</span>
+				<div class="swatches">
+					{palettes.map((p, i) => (
+						<button
+							class="swatch"
+							data-mode={mode}
+							data-index={i}
+							title={`${i + 1}: ${p.name}`}
+							style={`background:${(mode === 'light' ? p.light : p.dark)[0]};color:${mode === 'light' ? '#fff' : '#0f1419'}`}
+						>
+							{i + 1}
+						</button>
+					))}
+				</div>
+			</div>
+		))}
+		<label class="picker-link">
+			<input type="checkbox" id="picker-link" checked />
+			link modes (one click sets both)
+		</label>
+		<div class="picker-status" id="picker-status">No overrides</div>
+		<button class="picker-reset" id="picker-reset">Reset</button>
+	</div>
+</div>
+
+<script>
+	const picker = document.getElementById('debug-picker')!;
+	const palettes = JSON.parse(picker.dataset.palettes!) as {
+		name: string;
+		light: string[];
+		dark: string[];
+	}[];
+
+	let styleEl = document.getElementById('debug-theme-overrides');
+	if (!styleEl) {
+		styleEl = document.createElement('style');
+		styleEl.id = 'debug-theme-overrides';
+		document.head.appendChild(styleEl);
+	}
+
+	const stored = (mode: string) => {
+		const raw = localStorage.getItem(`debug-accent-${mode}`);
+		return raw !== null && +raw < palettes.length ? +raw : null;
+	};
+
+	const apply = () => {
+		const li = stored('light');
+		const di = stored('dark');
+		let css = '';
+		if (li !== null) {
+			const [accent, hover] = palettes[li].light;
+			css += `:root{--accent:${accent};--accent-hover:${hover};}`;
+		}
+		if (di !== null) {
+			const [accent, hover] = palettes[di].dark;
+			css += `[data-theme="dark"]{--accent:${accent};--accent-hover:${hover};}`;
+		}
+		styleEl!.textContent = css;
+
+		picker.querySelectorAll<HTMLButtonElement>('.swatch').forEach((btn) => {
+			const selected = btn.dataset.mode === 'light' ? li : di;
+			btn.classList.toggle('selected', selected === +btn.dataset.index!);
+		});
+
+		const fmt = (idx: number | null) =>
+			idx === null ? 'default' : `${idx + 1} ${palettes[idx].name}`;
+		document.getElementById('picker-status')!.textContent =
+			`Light: ${fmt(li)} · Dark: ${fmt(di)}`;
+	};
+
+	picker.querySelectorAll<HTMLButtonElement>('.swatch').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const linked = (document.getElementById('picker-link') as HTMLInputElement).checked;
+			const modes = linked ? ['light', 'dark'] : [btn.dataset.mode!];
+			modes.forEach((mode) => localStorage.setItem(`debug-accent-${mode}`, btn.dataset.index!));
+			apply();
+		});
+	});
+
+	document.getElementById('picker-reset')!.addEventListener('click', () => {
+		localStorage.removeItem('debug-accent-light');
+		localStorage.removeItem('debug-accent-dark');
+		apply();
+	});
+
+	const collapseBtn = document.getElementById('picker-collapse')!;
+	const setCollapsed = (collapsed: boolean) => {
+		picker.classList.toggle('collapsed', collapsed);
+		collapseBtn.textContent = collapsed ? '+' : '–';
+		collapseBtn.title = collapsed ? 'Expand' : 'Collapse';
+		localStorage.setItem('debug-picker-collapsed', collapsed ? '1' : '0');
+	};
+	collapseBtn.addEventListener('click', () =>
+		setCollapsed(!picker.classList.contains('collapsed'))
+	);
+	setCollapsed(localStorage.getItem('debug-picker-collapsed') === '1');
+
+	apply();
+</script>
+
+<style>
+	#debug-picker {
+		position: fixed;
+		bottom: 1rem;
+		right: 1rem;
+		z-index: 1000;
+		background: var(--bg-secondary);
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 10px;
+		padding: 0.6rem 0.75rem;
+		box-shadow: var(--box-shadow);
+		font-size: 0.7rem;
+		color: rgb(var(--gray-dark));
+		width: 248px;
+	}
+
+	#debug-picker.collapsed .picker-body {
+		display: none;
+	}
+
+	#debug-picker.collapsed {
+		width: auto;
+	}
+
+	.picker-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+
+	.picker-title {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.picker-collapse {
+		background: none;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 4px;
+		width: 1.4rem;
+		height: 1.4rem;
+		padding: 0;
+		cursor: pointer;
+		color: rgb(var(--gray-dark));
+		font-size: 0.8rem;
+		line-height: 1;
+	}
+
+	.picker-group {
+		margin-top: 0.5rem;
+	}
+
+	.picker-label {
+		display: block;
+		color: rgb(var(--gray));
+		text-transform: capitalize;
+		margin-bottom: 0.25rem;
+	}
+
+	.swatches {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+
+	.swatch {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		border: 2px solid transparent;
+		cursor: pointer;
+		font-size: 0.6rem;
+		font-weight: 700;
+		padding: 0;
+		line-height: 1;
+	}
+
+	.swatch.selected {
+		border-color: rgb(var(--black));
+		transform: scale(1.15);
+	}
+
+	.picker-link {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin-top: 0.6rem;
+		color: rgb(var(--gray));
+		cursor: pointer;
+	}
+
+	.picker-link input {
+		margin: 0;
+	}
+
+	.picker-status {
+		margin: 0.5rem 0 0.4rem;
+		color: rgb(var(--gray));
+	}
+
+	.picker-reset {
+		background: none;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 6px;
+		padding: 0.2rem 0.6rem;
+		cursor: pointer;
+		color: rgb(var(--gray-dark));
+		font-size: 0.7rem;
+	}
+
+	.picker-reset:hover {
+		border-color: var(--accent);
+	}
+
+	@media (max-width: 720px) {
+		#debug-picker {
+			bottom: 0.5rem;
+			right: 0.5rem;
+		}
+	}
+</style>
