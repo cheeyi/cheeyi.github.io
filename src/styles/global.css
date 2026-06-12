@@ -10,8 +10,9 @@
    To retheme the site, change --accent and --accent-hover in
    :root (light mode) and [data-theme="dark"] below. Every
    accent-colored element (links, badges, buttons, borders)
-   derives from these two variables; tinted backgrounds are
-   computed from them via color-mix().
+   derives from these two variables; tinted backgrounds —
+   including the page background and footer (--bg-primary /
+   --bg-secondary) — are computed from them via color-mix().
    ============================================================ */
 :root {
 	--accent: #0369a1; /* links, badges, active states */
@@ -22,11 +23,12 @@
 	--gray: 71, 85, 105;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
-	--bg-primary: #ffffff;
-	--bg-secondary: #f8fafc;
 	--box-shadow: 0 2px 6px rgba(var(--gray), 20%);
 
-	/* Derived accent tints — no need to touch when retheming */
+	/* Derived backgrounds and tints — no need to touch when retheming.
+	   Page and footer/card backgrounds carry a hint of the accent hue. */
+	--bg-primary: color-mix(in srgb, var(--accent) 4%, #ffffff);
+	--bg-secondary: color-mix(in srgb, var(--accent) 9%, #ffffff);
 	--accent-tint: color-mix(in srgb, var(--accent) 13%, transparent);
 }
 
@@ -40,10 +42,12 @@
 	--gray: 148, 163, 184;
 	--gray-light: 71, 85, 105;
 	--gray-dark: 226, 232, 240;
-	--bg-primary: #0f1419;
-	--bg-secondary: #1e2638;
 	--box-shadow: 0 2px 6px rgba(0, 0, 0, 40%);
 
+	/* Bases sit darker than the old neutrals (#0f1419 / #1e2638)
+	   because mixing in the bright dark-mode accent lightens them. */
+	--bg-primary: color-mix(in srgb, var(--accent) 7%, #0b0f14);
+	--bg-secondary: color-mix(in srgb, var(--accent) 13%, #131a22);
 	--accent-tint: color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
