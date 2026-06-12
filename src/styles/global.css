@@ -15,8 +15,8 @@
    --bg-secondary) — are computed from them via color-mix().
    ============================================================ */
 :root {
-	--accent: #0369a1; /* links, badges, active states */
-	--accent-hover: #075985; /* link/button hover */
+	--accent: #3f3f46; /* links, badges, active states */
+	--accent-hover: #27272a; /* link/button hover */
 
 	/* Light mode neutrals */
 	--black: 15, 18, 25;
@@ -34,8 +34,8 @@
 
 [data-theme="dark"] {
 	color-scheme: dark;
-	--accent: #38bdf8;
-	--accent-hover: #7dd3fc;
+	--accent: #a1a1aa;
+	--accent-hover: #d4d4d8;
 
 	/* Dark mode neutrals */
 	--black: 241, 245, 249;
